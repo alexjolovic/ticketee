@@ -1,4 +1,4 @@
-= form_for(@project) do |f|
+= simple_form_for @project, :html => { :class => 'form-horizontal' } do |f|
   #error_explanation
     %h2
       = pluralize(@project.errors.count, "error")
@@ -6,14 +6,8 @@
     %ul
       - @project.errors.full_messages.each do |msg|
         %li= msg
-  %p
-    = f.label :name
-    %br/
-    = f.text_field :name
-  %p
-    = f.label :description
-    %br/
-    = f.text_field :description
-    = f.submit
-
+  = f.input :name
+  = f.input :description
+  = f.button :submit, :class => 'btn'
+  = link_to t('.cancel', :default => t("helpers.links.cancel")), project_path(@project), :class => 'btn'
 
